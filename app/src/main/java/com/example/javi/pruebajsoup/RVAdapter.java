@@ -9,6 +9,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 /**
@@ -19,10 +21,12 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.MyViewHolder> {
 
     ArrayList<Item> items;
     Context context;
+    MyClickListener myClickListener;
 
     public RVAdapter(ArrayList<Item> items, Context context) {
         this.items = items;
         this.context = context;
+        myClickListener = (MyClickListener) context;
     }
 
     @Override
@@ -39,6 +43,17 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
+        Item itemselected = items.get(position);
+
+        holder.tvTitle.setText(itemselected.getsTitle());
+        holder.tvDesc.setText(itemselected.getsDesc());
+        Glide.with(context).load(itemselected.getsImgUrl()).fitCenter().into(holder.imNews);
+
+    }
+
+    public void setMyOnclickListener (MyClickListener myClickListener){
+
+        myClickListener = this.myClickListener;
     }
 
     @Override
@@ -64,6 +79,8 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.MyViewHolder> {
 
         @Override
         public void onClick(View v) {
+
+            myClickListener.MyOnClick(v, getAdapterPosition());
 
         }
     }

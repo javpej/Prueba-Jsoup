@@ -6,7 +6,7 @@
         android:id="@+id/cancel_action"
         android:title="Cancelar"
         android:icon="@drawable/ic_cancel"
-        app:sowAsAction = "always">
+        app:showAsAction = "always">
 
     </item>
 
